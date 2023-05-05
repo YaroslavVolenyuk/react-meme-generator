@@ -1,0 +1,104 @@
+body {
+  height: 100vh;
+  background: linear-gradient(
+    0deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 99, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 700px;
+  height: 600px;
+  border-radius: 2%;
+  box-shadow: 10px 10px 10px 1px #1a1a1a;
+  justify-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-auto-rows: minmax(100px, auto);
+  /* grid-template-rows: 200px; */
+  /* flex-direction: row; */
+}
+
+.generatedimage {
+  /* background-image: url('https://api.memegen.link/images/ams.jpg'); */
+  background-size: 450px 300px;
+  background-color: rgb(255, 213, 0);
+
+  /* background-color: tomato; */
+
+  height: 300px;
+  /* width: 50px; */
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.url {
+  background-color: rgb(255, 213, 0);
+  height: 300px;
+  /*  width: 50px; */
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.gallery {
+  background-color: rgb(255, 213, 0);
+
+  height: 200px;
+  /* width: 50px; */
+  border-radius: 10px;
+  margin: 10px;
+  display: flex-wrap;
+
+  /* justify-content: center; */
+  /* align-items: center; */
+
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.displayedimg {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px 5px;
+  height: 170px;
+  overflow-y: scroll;
+
+  /* grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: minmax(100px, auto); */
+
+  /* grid-column-gap: 1px;
+  grid-gap: 3px; */
+}
+
+.input {
+}
+
+::placeholder {
+  color: 'black';
+  text-align: center;
+}
+
+.btn {
+  background-color: white;
+  border: solid 1px rgb(238, 87, 137);
+  width: 150px;
+  border-radius: 10px;
+}

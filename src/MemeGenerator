@@ -1,0 +1,21 @@
+import React, { useState } from 'react';
+import styles from './meme.module.css';
+
+function MemeGenerator() {
+  const [memeID, setMemeID] = useState(['1']);
+  const [inputTop, setInputTop] = useState('');
+  const [inputBottom, setInputBottom] = useState('');
+
+  const imageUrl = `https://api.memegen.link/images/${memeID[1]}/${inputTop}/${inputBottom}.jpg`;
+
+  return (
+    <div
+      className={styles.meme}
+      style={{ backgroundImage: `url(${imageUrl})` }}
+    >
+      {/* your meme generator JSX code here */}
+    </div>
+  );
+}
+
+export default MemeGenerator;
