@@ -84,7 +84,12 @@ export default function App() {
           // style={{ backgroundImage: `url(${imageUrl})` }}
           data-test-id="meme-image"
         >
-          <img src={imageUrl} alt="" className={styles.generatedimage} />{' '}
+          <img
+            src={imageUrl}
+            alt=""
+            data-test-id="meme-image"
+            className={styles.generatedimage}
+          />{' '}
         </div>
 
         <div className={styles.url}>
