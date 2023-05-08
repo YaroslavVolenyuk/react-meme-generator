@@ -12,9 +12,7 @@ export default function App() {
   const [inputTop, setInputTop] = useState('');
   const [inputBottom, setInputBottom] = useState('');
   const [memeIndex, setMemeIndex] = useState([51]);
-  const [findMeme, setFindMeme] = useState('');
-  const [message, setMessage] = useState(''); // get input message for finding name of the meme
-  console.log(setFindMeme);
+  const [findMeme, setFindMeme] = useState(''); // get input message for finding name of the meme
   // id of meme
   useEffect(() => {
     async function fetchData() {
@@ -31,7 +29,7 @@ export default function App() {
     async function fetchURL() {
       const response = await fetch('https://api.memegen.link/templates/');
       const data = await response.json();
-      // console.log(data[0].example.url);
+      console.log(data[0].example.url);
       const imgUrl = data.map((item) => item.example.url);
       setImgURL(imgUrl);
     }
@@ -69,7 +67,7 @@ export default function App() {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      const index = memeID.findIndex((item) => item === message);
+      const index = memeID.findIndex((item) => item === findMeme);
       if (index !== -1) {
         setMemeIndex(index);
       }
@@ -97,12 +95,10 @@ export default function App() {
             placeholder="Search your meme"
             id="message"
             name="message"
-            value={message}
-            onChange={(event) => setMessage(event.currentTarget.value)}
+            value={findMeme}
+            onChange={(event) => setFindMeme(event.currentTarget.value)}
             onKeyDown={handleKeyDown}
           />
-
-          <p>{findMeme}</p>
           <input
             label="Top Text"
             // className={styles.input}
@@ -132,7 +128,7 @@ export default function App() {
               <button
                 aria-label="meme selector"
                 className={styles.btngallery}
-                key={`gallery-image-${image.id}`}
+                key={`gallery-image-${image}`}
                 src={image}
                 width="110"
                 height="90"
