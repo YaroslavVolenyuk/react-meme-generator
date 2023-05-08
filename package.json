@@ -8,9 +8,6 @@
     "@testing-library/user-event": "^13.2.1",
     "@upleveled/react-scripts": "5.0.5",
     "file-saver": "^2.0.5",
-    "https": "^1.0.0",
-    "image-downloader": "^4.3.0",
-    "nodejs-file-downloader": "^4.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -34,8 +31,10 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
+    "@types/file-saver": "^2.0.5",
     "@types/react": "^18.2.4",
     "@types/react-dom": "^18.2.3",
+    "@types/testing-library__jest-dom": "^5.14.5",
     "eslint-config-upleveled": "^4.2.2",
     "stylelint": "^15.6.1",
     "stylelint-config-upleveled": "^1.0.2",

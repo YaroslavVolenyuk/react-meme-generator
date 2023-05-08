@@ -91,9 +91,6 @@ body {
   grid-gap: 3px; */
 }
 
-.input {
-}
-
 ::placeholder {
   color: 'black';
   text-align: center;

@@ -11,8 +11,10 @@ export default function App() {
 
   const [inputTop, setInputTop] = useState('');
   const [inputBottom, setInputBottom] = useState('');
-  const [memeIndex, setMemeIndex] = useState([20]);
-
+  const [memeIndex, setMemeIndex] = useState([51]);
+  const [findMeme, setFindMeme] = useState('');
+  const [message, setMessage] = useState(''); // get input message for finding name of the meme
+  console.log(setFindMeme);
   // id of meme
   useEffect(() => {
     async function fetchData() {
@@ -20,6 +22,7 @@ export default function App() {
       const data = await response.json();
       const objectID = data.map((item) => item.id);
       setMemeID(objectID);
+      // console.log(objectID);
     }
     fetchData().catch((error) => console.error(error));
   }, []);
@@ -34,11 +37,6 @@ export default function App() {
     }
     fetchURL().catch((error) => console.error(error));
   }, []);
-
-  // update id of selected image
-  const handleClick = (index) => {
-    setMemeIndex(index);
-  };
 
   // symbols replacement
   const inputTopReplacement = inputTop
@@ -58,16 +56,27 @@ export default function App() {
 
   // download image:
   function downloadImage() {
-    const imageUrl = `https://api.memegen.link/images/${memeID[memeIndex]}/${
+    const downloadURL = `https://api.memegen.link/images/${memeID[memeIndex]}/${
       inputTopReplacement ? inputTopReplacement : '_'
     }${inputBottomReplacement ? '/' + inputBottomReplacement : ''}.jpg`;
-    const fileName = imageUrl.slice(imageUrl.lastIndexOf('/') + 1);
+    const fileName = `${memeID[memeIndex]}.jpg`;
 
-    fetch(imageUrl)
+    fetch(downloadURL)
       .then((response) => response.blob())
       .then((blob) => saveAs(blob, fileName))
       .catch((error) => console.log(error));
   }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      const index = memeID.findIndex((item) => item === message);
+      if (index !== -1) {
+        setMemeIndex(index);
+      }
+    }
+  };
+  // selecting meme by typing:
+  imgURL.find((element) => element.includes(findMeme));
 
   return (
     <div className="App">
@@ -75,18 +84,28 @@ export default function App() {
         <div
           className={styles.generatedimage}
           style={{ backgroundImage: `url(${imageUrl})` }}
+          data-test-id="meme-image"
         >
-          <></>
+          {' '}
         </div>
 
         <div className={styles.url}>
           <p>Custom meme:</p>
-          <br></br>
-
-          <input className={styles.input} />
 
           <input
             className={styles.input}
+            placeholder="Search your meme"
+            id="message"
+            name="message"
+            value={message}
+            onChange={(event) => setMessage(event.currentTarget.value)}
+            onKeyDown={handleKeyDown}
+          />
+
+          <p>{findMeme}</p>
+          <input
+            label="Top Text"
+            // className={styles.input}
             placeholder="Top line"
             value={inputTop}
             onChange={(event) => {
@@ -94,7 +113,8 @@ export default function App() {
             }}
           />
           <input
-            className={styles.input}
+            label="Bottom Text"
+            // className={styles.input}
             placeholder="Bottom line"
             value={inputBottom}
             onChange={(event) => {
@@ -110,8 +130,9 @@ export default function App() {
           <div className={styles.displayedimg}>
             {imgURL.map((image, index) => (
               <button
+                aria-label="meme selector"
                 className={styles.btngallery}
-                key={image.toString()}
+                key={`gallery-image-${image.id}`}
                 src={image}
                 width="110"
                 height="90"
