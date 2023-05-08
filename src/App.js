@@ -80,18 +80,18 @@ export default function App() {
     <div className="App">
       <section className={styles.section}>
         <div
-          className={styles.generatedimage}
-          style={{ backgroundImage: `url(${imageUrl})` }}
+          // className={styles.generatedimage}
+          // style={{ backgroundImage: `url(${imageUrl})` }}
           data-test-id="meme-image"
         >
-          {' '}
+          <img src={imageUrl} alt="" className={styles.generatedimage} />{' '}
         </div>
 
         <div className={styles.url}>
           <p>Custom meme:</p>
 
           <input
-            className={styles.input}
+            // className={styles.input}
             placeholder="Search your meme"
             id="message"
             name="message"
