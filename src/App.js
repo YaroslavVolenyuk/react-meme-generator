@@ -1,28 +1,24 @@
 import './App.css';
-import { type } from '@testing-library/user-event/dist/type';
+import { saveAs } from 'file-saver';
 import { useEffect, useState } from 'react';
-// import Images from './Images';
 import styles from './styles.module.css';
 
 // fetched template:
 export default function App() {
+  //
   const [memeID, setMemeID] = useState([]);
   const [imgURL, setImgURL] = useState([]);
 
   const [inputTop, setInputTop] = useState('');
   const [inputBottom, setInputBottom] = useState('');
-  let memeIndex = 0;
+  const [memeIndex, setMemeIndex] = useState([20]);
 
   // id of meme
   useEffect(() => {
     async function fetchData() {
       const response = await fetch('https://api.memegen.link/templates/');
       const data = await response.json();
-      // console.log(data[0]);
-      // console.log(data[0].example.text[1]);
-      // console.log(data[0].url);
       const objectID = data.map((item) => item.id);
-      // console.log(imgUrl);
       setMemeID(objectID);
     }
     fetchData().catch((error) => console.error(error));
@@ -34,38 +30,44 @@ export default function App() {
       const data = await response.json();
       // console.log(data[0].example.url);
       const imgUrl = data.map((item) => item.example.url);
-      // console.log(imgUrl);
       setImgURL(imgUrl);
     }
     fetchURL().catch((error) => console.error(error));
   }, []);
 
-  let imputTopReplacement;
-  imputTopReplacement = inputTop.replace('-', ' ');
-  imputTopReplacement = inputTop.replace('__', '-');
-  imputTopReplacement = inputTop.replace('--', '-');
-  imputTopReplacement = inputTop.replace(' ', '_');
-  imputTopReplacement = inputTop.replace('', '_');
+  // update id of selected image
+  const handleClick = (index) => {
+    setMemeIndex(index);
+  };
 
-  let inputBottomReplacement;
-  inputBottomReplacement = inputBottom.replace('-', ' ');
-  inputBottomReplacement = inputBottom.replace('__', '-');
-  inputBottomReplacement = inputBottom.replace('--', '-');
-  inputBottomReplacement = inputBottom.replace(' ', '_');
-  inputBottomReplacement = inputBottom.replace('', '_');
-  inputBottomReplacement = inputBottom.replace('+', '+++');
+  // symbols replacement
+  const inputTopReplacement = inputTop
+    .replace(/__/g, '-')
+    .replace(/--/g, '-')
+    .replace(/ /g, '_');
 
-  // console.log(inputTop);
-  // console.log(imputTopReplacement);
-  // console.log(inputBottom);
-  // console.log(inputBottomReplacement);
-
-  // console.log(
-  //   `https://api.memegen.link/images/${memeID[1]}/${imputTopReplacement}/${inputBottomReplacement}.jpg`,
-  // );
+  const inputBottomReplacement = inputBottom
+    .replace(/__/g, '-')
+    .replace(/--/g, '-')
+    .replace(/ /g, '_');
 
   // ссыла на генерацию картинки
-  const imageUrl = `https://api.memegen.link/images/${memeID[memeIndex]}/${imputTopReplacement}/${inputBottomReplacement}.jpg`;
+  const imageUrl = `https://api.memegen.link/images/${memeID[memeIndex]}/${
+    inputTopReplacement ? inputTopReplacement : '_'
+  }${inputBottomReplacement ? '/' + inputBottomReplacement : ''}.jpg`;
+
+  // download image:
+  function downloadImage() {
+    const imageUrl = `https://api.memegen.link/images/${memeID[memeIndex]}/${
+      inputTopReplacement ? inputTopReplacement : '_'
+    }${inputBottomReplacement ? '/' + inputBottomReplacement : ''}.jpg`;
+    const fileName = imageUrl.slice(imageUrl.lastIndexOf('/') + 1);
+
+    fetch(imageUrl)
+      .then((response) => response.blob())
+      .then((blob) => saveAs(blob, fileName))
+      .catch((error) => console.log(error));
+  }
 
   return (
     <div className="App">
@@ -100,17 +102,24 @@ export default function App() {
             }}
           />
 
-          <button className={styles.btn}> Download!</button>
+          <button onClick={downloadImage} className={styles.btn}>
+            Download!
+          </button>
         </div>
         <div className={styles.gallery}>
           <div className={styles.displayedimg}>
-            {imgURL.map((image) => (
-              <img
+            {imgURL.map((image, index) => (
+              <button
+                className={styles.btngallery}
                 key={image.toString()}
                 src={image}
                 width="110"
                 height="90"
                 alt=""
+                onClick={() => setMemeIndex(index)}
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}
               />
             ))}
           </div>

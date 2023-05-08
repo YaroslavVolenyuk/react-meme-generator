@@ -29,8 +29,11 @@ body {
 
 .generatedimage {
   /* background-image: url('https://api.memegen.link/images/ams.jpg'); */
-  background-size: 450px 300px;
-  background-color: rgb(255, 213, 0);
+  /* background-size: 450px 300px; */
+  background-color: rgb(240, 240, 240);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 
   /* background-color: tomato; */
 
@@ -44,7 +47,7 @@ body {
 }
 
 .url {
-  background-color: rgb(255, 213, 0);
+  background-color: rgb(240, 240, 240);
   height: 300px;
   /*  width: 50px; */
   border-radius: 10px;
@@ -57,7 +60,7 @@ body {
 }
 
 .gallery {
-  background-color: rgb(255, 213, 0);
+  background-color: rgb(240, 240, 240);
 
   height: 200px;
   /* width: 50px; */
@@ -101,4 +104,12 @@ body {
   border: solid 1px rgb(238, 87, 137);
   width: 150px;
   border-radius: 10px;
+}
+
+.btngallery {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 110px;
+  height: 90px;
 }

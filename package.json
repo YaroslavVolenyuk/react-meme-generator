@@ -7,6 +7,10 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@upleveled/react-scripts": "5.0.5",
+    "file-saver": "^2.0.5",
+    "https": "^1.0.0",
+    "image-downloader": "^4.3.0",
+    "nodejs-file-downloader": "^4.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -15,12 +19,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -35,9 +33,10 @@
     ]
   },
   "devDependencies": {
+    "@jest/globals": "^29.5.0",
     "@types/react": "^18.2.4",
     "@types/react-dom": "^18.2.3",
-    "eslint-config-upleveled": "^4.1.9",
+    "eslint-config-upleveled": "^4.2.2",
     "stylelint": "^15.6.1",
     "stylelint-config-upleveled": "^1.0.2",
     "typescript": "^5.0.4"
