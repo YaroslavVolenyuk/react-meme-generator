@@ -126,7 +126,7 @@ export default function App() {
           <div className={styles.displayedimg}>
             {imgURL.map((image, index) => (
               <button
-                aria-label="meme selector"
+                aria-label="Meme template"
                 className={styles.btngallery}
                 key={`gallery-image-${image}`}
                 src={image}
